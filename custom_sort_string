@@ -1,0 +1,101 @@
+Custom Sort String
+👩‍🎓 NEW GRAD
+📚
+RELATED PROBLEMS
+
+AWS provides several utilities for language processing. Develop a helper service to sort a list of strings based on a custom order of characters.
+
+More formally, you are given a custom alphabet system that consists of exactly k characters. Their sorted alphabetical order is given by a string of distinct characters, order. An array arr contains n strings to sort according to the special ordering. Each string in arr contains only characters in order.
+
+Note: A string x = x1x2 ... xn is lexicographically smaller than string y = y1y2 ... ym if either n < m and x1 = y1, x2 = y2, ... xn = ym, or exists some number r (1 ≤ r < n, r < m), such that x1 = y1, x2 = y2, ... xr-1 = yr-1, xr < yr.
+
+Function Description
+
+Complete the function customSortString in the editor below.
+
+customSortString has the following parameters:
+
+string order: the custom order alphabet of k characters
+string arr[n]: the strings to sort
+Returns
+
+string(s): the sorted strings
+public String[] customSortString(String order, String[] arr) 
+{
+  //Base Check
+  if(order == "")
+  {
+    return arr;
+  }
+
+  //Init
+  String[] value;
+
+  //Compute
+  Arrays.sort(arr, (a, b) -> weight(a, b, order));
+
+  //Return
+  return arr;
+  
+}
+
+public int weight(String s1, String s2, String order)
+{
+  //Base Check
+  if(s1 == "" || s2 == "")
+  {
+    return 0;
+  }
+
+  //Init
+  int value;
+
+  //Compute
+  int flag = 0;
+  for(int i = 0; i < Math.min(s1.length(), s2.length()); i++)
+  {
+    //current letter
+    char a = s1.charAt(i), b = s2.charAt(i);
+    int order1 = order.indexOf(a), order2 = order.indexOf(b);
+    if(order1 != order2)
+    {
+      if(order1 < order2)
+      {
+        flag = -1;
+        break;
+      }
+      else if(order1 > order2)
+      {
+        flag = 1;
+        break;
+      }
+      
+    }// if
+
+  }// for
+
+  if(flag == 0)
+  {
+    if(s1.length() == s2.length())
+    {
+      value = 0;
+    }
+    else if(s1.length() < s2.length())
+    {
+      value = -1;
+    }
+    else
+    {
+      value = 1;
+    }
+  
+  }
+  else
+  {
+    value = flag;
+  }
+
+  //Return
+  return value;
+  
+}
