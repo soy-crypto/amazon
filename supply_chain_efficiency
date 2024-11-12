@@ -1,0 +1,44 @@
+Calculate Warehouse Efficiency (Probably for Supply Chain related NG positions :)
+👩‍🎓 NEW GRAD
+📚
+RELATED PROBLEMS
+
+The supply chain manager at one of Amazon's warehouses wants to measure the efficiency of the way parcels are shipped. The volume of each parcel is represented in the array parcelWeights. Each day, the first and last parcels in the array parcelWeights are shipped until all of them are dispatched.
+
+The manager comes up with metrics to calculate warehouse efficiency. Each day before shipping, any parcel in the warehouse is chosen and its volume is added to the sum of total efficiency. A parcel can only be chosen once.
+
+Given the array parcelWeights, find the maximum possible efficiency of the warehouse.
+
+public int calculateWarehouseEfficiency(int[] parcelWeights)
+{
+  //Base Check
+  if(parcelWeights == null)
+  {
+    return 0;
+  }
+
+  //Init
+  int value = 0;
+
+  //Compute
+  int i = 0, j = parcelWeights.length - 1;
+  while(true)
+  {
+    //tc
+    if(i > j)
+    {
+      break;
+    }
+
+    //current pair
+    value += Math.max(parcelWeights[i], parcelWeights[j]);
+
+    //next pair
+    i++;
+    j--;
+  }
+
+  //Return
+  return value;
+  
+}
